@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abuzar Store - Digital Products</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #3b82f6;
+            --accent: #10b981;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Grid System */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Product Card */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .icon-box {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Button */
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #059669;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid #334155;
+            margin-top: 40px;
+        }
+
+        /* --- POPUP MODAL STYLES --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: #25D366; /* WhatsApp Green */
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .modal-text {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            background-color: #128C7E;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Mobile Tweaks */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .container { padding: 20px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- POPUP MODAL HTML -->
+    <div class="modal-overlay" id="popupModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <h2 class="modal-title">Join Our WhatsApp Channel!</h2>
+            <p class="modal-text">Get latest updates, new product alerts and exclusive offers directly on WhatsApp.</p>
+            
+            <a href="https://whatsapp.com/channel/0029VbAHXvWChq6UmHjUnZ24" target="_blank" class="whatsapp-btn">
+                <i class="fa-solid fa-arrow-right"></i> Follow Channel
+            </a>
+            
+            <br>
+            <button class="close-btn" onclick="closeModal()">Skip for now</button>
+        </div>
+    </div>
+
+    <header>
+        <h1><i class="fa-solid fa-bolt"></i> Abuzar Store</h1>
+        <p>Premium Accounts, VPN & Digital Services</p>
+    </header>
+
+    <div class="container">
+        <div class="product-grid">
+
+            <!-- Product 1 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-user-flag"></i></div>
+                <h3>Fresh UK Account</h3>
+                <div class="price">200 PKR</div>
+                <button class="btn" onclick="orderProduct('Fresh UK Account', '200')">Order Now</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+                <h3>Virtual WhatsApp Number</h3>
+                <div class="price">499 PKR</div>
+                <button class="btn" onclick="orderProduct('Virtual WhatsApp Number', '499')">Order Now</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-star"></i></div>
+                <h3>Premium Account</h3>
+                <div class="price">800 PKR</div>
+                <button class="btn" onclick="orderProduct('Premium Account', '800')">Order Now</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-brands fa-youtube"></i></div>
+                <h3>YouTube Watch Time</h3>
+                <div class="price">8000 PKR</div>
+                <button class="btn" onclick="orderProduct('YouTube Watch Time', '8000')">Order Now</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-robot"></i></div>
+                <h3>ChatGPT Premium Account</h3>
+                <div class="price">800 PKR</div>
+                <button class="btn" onclick="orderProduct('ChatGPT Premium Account', '800')">Order Now</button>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-users"></i></div>
+                <h3>Real Channel Followers</h3>
+                <div class="price">1000 PKR</div>
+                <button class="btn" onclick="orderProduct('Real Channel Followers', '1000')">Order Now</button>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>NordVPN Monthly Sub</h3>
+                <div class="price">700 PKR</div>
+                <button class="btn" onclick="orderProduct('NordVPN Monthly Subscription', '700')">Order Now</button>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-lock"></i></div>
+                <h3>SurfShark VPN Monthly Sub</h3>
+                <div class="price">700 PKR</div>
+                <button class="btn" onclick="orderProduct('SurfShark VPN Monthly Subscription', '700')">Order Now</button>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-user-group"></i></div>
+                <h3>Real WhatsApp Group Members</h3>
+                <div class="price">1000 PKR</div>
+                <button class="btn" onclick="orderProduct('Real WhatsApp Group Members', '1000')">Order Now</button>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-fingerprint"></i></div>
+                <h3>EasyPaisa / JazzCash Biometric Fix</h3>
+                <div class="price">1200 PKR</div>
+                <button class="btn" onclick="orderProduct('EasyPaisa / JazzCash Biometric Fix', '1200')">Order Now</button>
+            </div>
+
+            <!-- Product 11 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-tv"></i></div>
+                <h3>Netflix Account - 1 Month</h3>
+                <div class="price">999 PKR</div>
+                <button class="btn" onclick="orderProduct('Netflix Account - 1 Month', '999')">Order Now</button>
+            </div>
+
+            <!-- Product 12 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Gemini Ai Pro Accounts</h3>
+                <div class="price">1500 PKR</div>
+                <button class="btn" onclick="orderProduct('Gemini Ai Pro Accounts', '1500')">Order Now</button>
+            </div>
+
+            <!-- Product 13 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-user-slash"></i></div>
+                <h3>Whatsapp Unban Support</h3>
+                <div class="price">1200 PKR</div>
+                <button class="btn" onclick="orderProduct('Whatsapp Unban Support', '1200')">Order Now</button>
+            </div>
+
+            <!-- Product 14 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>ZEROX Pack 1000+ Methods</h3>
+                <div class="price">1000 PKR</div>
+                <button class="btn" onclick="orderProduct('ZEROX Pack 1000+ Methods', '1000')">Order Now</button>
+            </div>
+
+            <!-- Product 15 -->
+            <div class="card">
+                <div class="icon-box"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h3>32 Premium Course</h3>
+                <div class="price">400 PKR</div>
+                <button class="btn" onclick="orderProduct('32 Premium Course', '400')">Order Now</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Abuzar Store. All rights reserved.</p>
+        <p>Contact: +92 346 9139342</p>
+    </footer>
+
+    <script>
+        // Phone number configuration
+        const phoneNumber = "923469139342";
+
+        function orderProduct(productName, price) {
+            const text = `Hello, I want to buy ${productName} for ${price} PKR`;
+            const encodedText = encodeURIComponent(text);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Show Popup on Page Load
+        window.onload = function() {
+            const modal = document.getElementById('popupModal');
+            modal.style.display = 'flex';
+        };
+
+        // Close Modal Function
+        function closeModal() {
+            document.getElementById('popupModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
